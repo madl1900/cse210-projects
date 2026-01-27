@@ -12,7 +12,7 @@ class Program
         // /* comment over
         // multiple lines */
         
-        // // naming in C# for public files is ThisIsTheName.cs, private files are tHISiStHEnAME.cs
+        // // naming in C# for public files is ThisIsTheName.cs, private files are _thisIsTheName.cs
         
         // // You must declare variable types
         // int x = 5;
@@ -120,7 +120,33 @@ class Program
 
         // Console.WriteLine(Add(1,2));
 
+        
+        
+        // // WEEK 4 - Jan 27, 2026
+        
+        // // Classes
+        // /* classes are like a recipe and objects are the cake, you can build 
+        // as many objects as you want with one class */
 
+        // Counter myCounter = new Counter();
+        // myCounter.Run();
+
+        // Message m1 = new Message();
+        // m1._message = "Send help!";
+        // m1._priority = 1;
+
+        // Console.WriteLine(m1.GetMessage());
+
+        // Message m2 = new Message();
+        // m2._message = "Please pick up carrots at the store";
+        // m2._priority = 3;
+
+        // m2.Display();
+
+        // // Abstraction
+        // /* the process of simplifying complex ideasby focusing on essential characteristics
+        // and ignoring other details - finding the core elements */
+        // // class diagrams use abstraction
 
     }
 }
