@@ -29,8 +29,10 @@ public class Car
                     carHorn.Honk();
                 }
             }
-            if (clicker.IsPanic)
+            else if (clicker.IsPanic)
             {
+                carHorn.Honk();
+                carHorn.Honk();
                 carHorn.Honk();
             }
 
@@ -106,14 +108,5 @@ public class RemoteClicker
 {
     public bool IsArmed = false;
     public bool IsPanic = false;
-
-
-    public void Panic()
-    {
-        if (IsPanic == true)
-        {
-            
-        }
-    }
 
 }
