@@ -153,7 +153,44 @@ class Program
         // Car myCar = new Car();
         // myCar.Run();
 
+        // // Feb 5, 2026
 
+        // // ToString()
+        // // switch statement
+
+        // Console.WriteLine("Select an option: ");
+
+        // switch (Console.ReadLine())
+        // {
+        //     case "1":
+        //         DoSomething();
+        //         break;
+        // }
+
+        // // reading files
+        // string filename = "myFile.txt";
+        // string[] lines = System.IO.File.ReadAllLines(filename);
+
+        // foreach (string line in lines)
+        // {
+        //     string[] parts = line.Split(",");
+        //     string firstName = parts[0];
+        //     string lastName = parts[1];
+        // }
+
+        // // writing files
+        // using System.IO;
+
+        // string filename = "myFile.txt";
+
+        // using (StreamWriter outputFile = new StreamWriter(filename))
+        // {
+        //     outputFile.WriteLine("This will be the first line in the file");
+        //     string color = "Blue";
+        //     outputFile.WriteLine($"My favorite color is {color}");
+        // }
+        PlotManager p = new PlotManager();
+        p.Run();
     }
 }
 
