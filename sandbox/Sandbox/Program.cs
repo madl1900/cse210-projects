@@ -189,8 +189,19 @@ class Program
         //     string color = "Blue";
         //     outputFile.WriteLine($"My favorite color is {color}");
         // }
-        PlotManager p = new PlotManager();
-        p.Run();
+        // PlotManager p = new PlotManager();
+        // p.Run();
+
+        // // Week 6 - Feb 10, 2026
+
+        // /* Encapsulation - cleans up program by only making necessary
+        // parts of the class accessible 
+        // In general, make as much of your class private as possible.
+        // You can even password protect your class methods by adding a _password member*/
+
+        // /* Getters and Setters - give you a way to access private members without
+        // making it public. Getters let you view members, while setters let you change them
+        // and put constraints on them*/
     }
 }
 
