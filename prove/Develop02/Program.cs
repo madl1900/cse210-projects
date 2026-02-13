@@ -14,6 +14,37 @@ class Program
 
         Journal myJournal = new Journal();
 
-        myJournal.ShowMenu();
+        string menuChoice = "";
+        while (menuChoice != "5")
+        {   
+            Console.WriteLine();
+            Console.WriteLine("Select an option from the menu: ");
+            Console.WriteLine("1. Write a journal entry");
+            Console.WriteLine("2. Display current journal entries");
+            Console.WriteLine("3. Save journal to file");
+            Console.WriteLine("4. Load a previous journal file");
+            Console.WriteLine("5. Exit the journal");
+            menuChoice = Console.ReadLine();
+            switch (menuChoice)
+            {
+                case "1":
+                    myJournal.SaveEntry();
+                    break;
+                case "2":
+                    myJournal.DisplayJournal();
+                    break;
+                case "3":
+                    myJournal.SaveJournal();
+                    break;
+                case "4":
+                    myJournal.LoadJournal();
+                    break;
+                case "5":
+                    break;
+                default:
+                    Console.WriteLine("Please enter a number from the list");
+                    break;
+            }
+        }
     }
 }

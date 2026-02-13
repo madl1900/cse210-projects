@@ -23,19 +23,29 @@ public class Journal
         {
             foreach (Entry e in _entries)
             {
-                Console.WriteLine($"\nDate: {e._date}\nPrompt: {e._entryPrompt._prompt}\nResponse: {e._entry}");
+                e.DisplayEntry();
             }
         }
         else if (response == "date")
         {   
             Console.Write("What date would you like to view (mm/dd/yyyy)? ");
-            string searchDate = Console.ReadLine();
+            
+            string userDate = Console.ReadLine();
+            
+            string[] parts = userDate.Split("/");
+            int month = int.Parse(parts[0]);
+            int day = int.Parse(parts[1]);
+            int year = int.Parse(parts[2]);
+
+            DateTime searchDate = new DateTime(year, month, day);
             
             foreach (Entry e in _entries)
             {
-                if (e._date == searchDate)
+                bool isMatch = searchDate.Date == e._date.Date;
+
+                if (isMatch)
                 {
-                    Console.WriteLine($"\nDate: {e._date}\nPrompt: {e._entryPrompt._prompt}\nResponse: {e._entry}");
+                    e.DisplayEntry();
                 }
             }
         }
@@ -73,7 +83,7 @@ public class Journal
             Entry loadEntry = new Entry();
 
             string[] parts = line.Split("|");
-            loadEntry._date = parts[0];
+            loadEntry._date = DateTime.Parse(parts[0]);
             loadEntry._entryPrompt._prompt = parts[1];
             loadEntry._entry = parts[2];
 
@@ -81,41 +91,5 @@ public class Journal
         }
         DisplayJournal();
         return _entries;
-    }
-
-    public void ShowMenu()
-    {
-        string menuChoice = "";
-        while (menuChoice != "5")
-        {   
-            Console.WriteLine();
-            Console.WriteLine("Select an option from the menu: ");
-            Console.WriteLine("1. Write a journal entry");
-            Console.WriteLine("2. Display current journal entries");
-            Console.WriteLine("3. Save journal to file");
-            Console.WriteLine("4. Load a previous journal file");
-            Console.WriteLine("5. Exit the journal");
-            menuChoice = Console.ReadLine();
-            switch (menuChoice)
-            {
-                case "1":
-                    SaveEntry();
-                    break;
-                case "2":
-                    DisplayJournal();
-                    break;
-                case "3":
-                    SaveJournal();
-                    break;
-                case "4":
-                    LoadJournal();
-                    break;
-                case "5":
-                    break;
-                default:
-                    Console.WriteLine("Please enter a number from the list");
-                    break;
-            }
-        }
     }
 }
