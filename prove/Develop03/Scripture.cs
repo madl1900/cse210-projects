@@ -10,19 +10,19 @@ public class Scripture
     {
         _reference = reference;
         _verse = verse;
-        _words = GetWordList();
+        _words = GetWordList(_verse, _words);
     }
 
-    private List<Word> GetWordList()
+    private List<Word> GetWordList(string verse, List<Word> words)
     {
         List<string> stringList = new List<string>();
-        stringList = _verse.Split(' ').ToList();
+        stringList = verse.Split(' ').ToList();
 
         foreach (string word in stringList)
         {
-            _words.Add(new Word(word));
+            words.Add(new Word(word));
         }
-        return _words;
+        return words;
     }
 
     private void DisplayScripture()
@@ -80,6 +80,7 @@ public class Scripture
 
             if (hiddenCount == _words.Count)
             {
+                CheckMemory();
                 break;
             }
             else
@@ -90,5 +91,65 @@ public class Scripture
             }
         }
         
+    }
+    
+    public void CheckMemory()
+    {   
+        Console.WriteLine();
+        Console.WriteLine("Test your memory! \nType the whole verse and see how many words you get right. \nHint: Don't forget about punctuation!");
+    
+        string tryAgain = "";
+        
+        while (tryAgain != "N")
+        {   
+            string userVerse = Console.ReadLine();
+            List<Word> userWords = new List<Word>();
+            userWords = GetWordList(userVerse, userWords);
+            int correctCount = 0;
+            int index = 0;
+
+            if (userWords.Count == _words.Count)
+            {
+                Console.Clear();
+                foreach (Word userWord in userWords)
+                {
+                    _words[index].UnhideWord();
+
+                    if (userWord.GetWord() == _words[index].GetWord())
+                    {
+                        Console.Write($"{_words[index].GetWord()} ");
+                        _words[index].HideWord();
+                        correctCount++;
+                    }
+                    else
+                    {
+                        _words[index].HideWord();
+                        Console.Write($"{_words[index].GetWord()} ");
+                    }
+            
+                    index++;
+                }
+
+                Console.WriteLine($"\nYou got {correctCount} out of {_words.Count} words correct.");
+
+                if (correctCount == _words.Count)
+                {
+                    Console.Write($"Congratulations! You memorized the scripture: ");
+                    _reference.DisplayReference();
+                    break;
+                }
+            }  
+            else if (userWords.Count > _words.Count)
+            {
+                Console.WriteLine("\nThat is too many words");
+            }
+            else
+            {
+                Console.WriteLine("\nThat is not enough words");
+            }
+
+            Console.Write("\nWould you like to try again (Y/N)? ");
+            tryAgain = Console.ReadLine();
+        }
     }
 }

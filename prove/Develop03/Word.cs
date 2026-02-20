@@ -18,6 +18,11 @@ public class Word
     {
       _isHidden = true;  
     }
+
+    public void UnhideWord()
+    {
+        _isHidden = false;
+    }
     public string GetWord()
     {
         if (_isHidden)
