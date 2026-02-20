@@ -95,13 +95,13 @@ public class Scripture
     
     public void CheckMemory()
     {   
-        Console.WriteLine();
-        Console.WriteLine("Test your memory! \nType the whole verse and see how many words you get right. \nHint: Don't forget about punctuation!");
-    
         string tryAgain = "";
         
         while (tryAgain != "N")
         {   
+            Console.WriteLine();
+            Console.WriteLine("Test your memory! \nType the whole verse and see how many words you get right. \nHint: Don't forget about punctuation!");
+
             string userVerse = Console.ReadLine();
             List<Word> userWords = new List<Word>();
             userWords = GetWordList(userVerse, userWords);
@@ -150,6 +150,7 @@ public class Scripture
 
             Console.Write("\nWould you like to try again (Y/N)? ");
             tryAgain = Console.ReadLine();
+            Console.Clear();
         }
     }
 }
