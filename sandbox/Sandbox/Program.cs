@@ -202,6 +202,12 @@ class Program
         // /* Getters and Setters - give you a way to access private members without
         // making it public. Getters let you view members, while setters let you change them
         // and put constraints on them*/
+
+        // // Week 8 - Feb 24, 2026
+
+        // /* Inheritance - setting up base classes that can be transferred to more specified
+        // classes. Parent to child, super to sub, base to derived. Inheritance allows you to
+        // use the same code for multiple related classes, without redundancy. */
     }
 }
 
