@@ -1,8 +1,7 @@
 using System;
 /* 
 I exceeded requirements for this assignment by adding a new class/activity that has the user picture
-an image and reflect on the different aspects of their image. I also created a subclass called PromptActivity
-that holds the common member variables and methods for the three activities that use lists.
+an image and reflect on the different aspects of their image.
 */
 class Program
 {
