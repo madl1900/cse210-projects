@@ -7,7 +7,7 @@ public class BreathingActivity : Activity
     public void DisplayBreatheMessage()
     {
 
-        StartMessage(_name, _description);
+        StartMessage();
 
         GetActivityTime();
 
@@ -25,6 +25,6 @@ public class BreathingActivity : Activity
             Console.WriteLine();
         }
 
-        EndMessage(_name, _duration);
+        EndMessage();
     }
 }

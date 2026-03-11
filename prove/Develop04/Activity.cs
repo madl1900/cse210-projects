@@ -12,13 +12,13 @@ public class Activity
         _description = description;
     }
 
-    public int StartMessage(string name, string description)
+    public int StartMessage()
     {
         Console.Clear();
 
-        Console.WriteLine($"Welcome to the {name}.");
+        Console.WriteLine($"Welcome to the {_name}.");
         Console.WriteLine();
-        Console.WriteLine(description);
+        Console.WriteLine(_description);
 
         Console.WriteLine();
         Console.Write("How many seconds would you like to do your activity? ");
@@ -32,14 +32,14 @@ public class Activity
         return _duration;
     }
 
-    public void EndMessage(string name, int duration)
+    public void EndMessage()
     {
         Console.Clear();
         Console.WriteLine("Good job!");
         
         Spinner(3);
 
-        Console.WriteLine($"\nYou completed {duration} seconds of the {name}");
+        Console.WriteLine($"\nYou completed {_duration} seconds of the {_name}");
 
         Spinner(5);
     }

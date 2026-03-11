@@ -1,20 +1,26 @@
 using System.Formats.Asn1;
 
-public class ListingActivity : PromptActivity
+public class ListingActivity : Activity
 {
+    private List<string> _prompts = new List<string>();
+    private List<string> _listingItems = new List<string>();
 
     public ListingActivity(string name, string description) : base(name, description)
     {
-        
+        _prompts.Add("Who are people that you appreciate?");
+        _prompts.Add("What are personal strengths of yours?");
+        _prompts.Add("Who are people that you have helped this week?");
+        _prompts.Add("When have you felt the Holy Ghost this month?");
+        _prompts.Add("Who are some of your personal heroes?");
     }
 
-    public void MakePrompts()
+    public string GetPrompt()
     {
-        MakeList("Who are people that you appreciate?", _prompts);
-        MakeList("What are personal strengths of yours?", _prompts);
-        MakeList("Who are people that you have helped this week?", _prompts);
-        MakeList("When have you felt the Holy Ghost this month?", _prompts);
-        MakeList("Who are some of your personal heroes?", _prompts);
+        Random randomNum = new Random();
+
+        string myString = _prompts[randomNum.Next(_prompts.Count)];
+
+        return myString;
     }
 
 
@@ -22,11 +28,9 @@ public class ListingActivity : PromptActivity
     {
         Console.Clear();
 
-        StartMessage(_name, _description);
+        StartMessage();
 
-        MakePrompts();
-
-        Console.WriteLine(GetListString(_prompts));
+        Console.WriteLine(GetPrompt());
 
         Countdown(5);
 
@@ -38,13 +42,13 @@ public class ListingActivity : PromptActivity
         {
             string answer = Console.ReadLine();
 
-            MakeList(answer, _reflections);
+            _listingItems.Add(answer);
         }
 
-        Console.WriteLine($"\nYou listed {_reflections.Count} items!");
+        Console.WriteLine($"\nYou listed {_listingItems.Count} items!");
 
         Spinner(5);
 
-        EndMessage(_name, _duration);
+        EndMessage();
     }
 }
