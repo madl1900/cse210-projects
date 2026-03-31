@@ -9,8 +9,13 @@ public class Instrument
         _type = type;
     }
 
-    public void DisplayInstrument()
+    public string DisplayInstrument()
     {
-        // TODO: Display instrument details
+        return $"Instrument: {_name} Type: {_type}";
+    }
+
+    public string SaveInstrument()
+    {
+        return $"Instrument,{_name},{_type}";
     }
 }

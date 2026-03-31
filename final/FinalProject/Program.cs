@@ -42,12 +42,47 @@ class Program
 
             else if (mainMenuChoice == "3")
             {
-                Console.WriteLine("What would you like to do in the instrument manager?");
+                string instrMenuChoice = "";
 
-                Console.WriteLine();
-                Console.WriteLine("1. Add a new instrument\n2. Display all instruments\n3. Save instruments to file\n4. Load a file\n5. Exit Instrument Manager");
+                while (instrMenuChoice != "5")
+                {
+                    Console.WriteLine("What would you like to do in the instrument manager?");
 
-                // TODO: add instrument manager options
+                    Console.WriteLine();
+                    Console.WriteLine("1. Add a new instrument\n2. Display all instruments\n3. Save instruments to file\n4. Load a file\n5. Exit Instrument Manager");
+                    instrMenuChoice = Console.ReadLine();
+                    
+                    // TODO: add instrument manager options
+                    if (instrMenuChoice == "1")
+                    {
+                        myInstruments.AddInstrument();
+                    }
+
+                    else if (instrMenuChoice == "2")
+                    {
+                        myInstruments.DisplayInstruments();
+                    }
+
+                    else if (instrMenuChoice == "3")
+                    {
+                        myInstruments.SaveInstruments();
+                    }
+
+                    else if (instrMenuChoice == "4")
+                    {
+                        myInstruments.LoadInstruments();
+                    }
+
+                    else if (instrMenuChoice == "5")
+                    {
+                        break;
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("Please choose an option from the menu.");
+                    }
+                }
             }
 
             else if (mainMenuChoice == "4")
