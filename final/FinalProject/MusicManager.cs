@@ -3,19 +3,19 @@ public class MusicManager
     private List<MusicPiece> _songs = new List<MusicPiece>();
     private List<MusicScale> _scales = new List<MusicScale>();
 
-    public void AddMusic(MusicManager music, List<Music> musicList)
+    public void AddMusic(MusicManager music, string type)
     {
-        // add music to the list of music
+        // add music to the corresponding type of music list
     }
 
-    public void DisplayMusic(List<Music> musicList)
+    public void DisplayMusic()
     {
-        // Display everything in a list
+        // Display everything in both lists
     }
 
-    public Music GetRandomMusic(List<Music> musicList)
+    public void GetRandomMusic(List<Music> musicList)
     {
-        // TODO: return a random piece of music from the list
+        // TODO: RETURN a random piece of music from the list
     }
 
     public void SaveMusicFile(string filename)
