@@ -1,4 +1,4 @@
-public class Music
+public abstract class Music
 {
     protected string _name;
     protected int _tempo;
@@ -11,10 +11,9 @@ public class Music
         _timeSignature = timeSignature;
     }
 
-    public virtual void DisplayInfo()
-    {
-        // TODO: set default to display music info
-    }
+    public abstract string DisplayInfo();
+
+    public abstract string SaveInfo();
 
     public int GetTempo()
     {

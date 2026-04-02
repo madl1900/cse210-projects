@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 
 class Program
 {
@@ -6,7 +7,7 @@ class Program
     {
         string mainMenuChoice = "";
 
-        while (mainMenuChoice != "5")
+        while (mainMenuChoice != "4")
         {
             Console.WriteLine("\nWelcome to the practice room!");
 
@@ -16,7 +17,7 @@ class Program
         
             Console.WriteLine();
             Console.WriteLine("Please choose an option from the menu:");
-            Console.WriteLine("1. Practice Log\n2. Music manager\n3. Instrument Manager\n4. Metronome\n5. Quit");
+            Console.WriteLine("1. Practice Log\n2. Music manager\n3. Metronome\n4. Quit");
             mainMenuChoice = Console.ReadLine();
 
             if (mainMenuChoice == "1")
@@ -32,60 +33,28 @@ class Program
 
             else if (mainMenuChoice == "2")
             {
-                Console.WriteLine("What would you like to do in the music manager?");
+                string musicMenuChoice = "";
 
-                Console.WriteLine();
-                Console.WriteLine("1. Add new music\n2. Display all music\n3. Save music to file\n4. Load a file\n5. Exit Music Manager");
-
-                // TODO: add music manager options
-            }
-
-            else if (mainMenuChoice == "3")
-            {
-                string instrMenuChoice = "";
-
-                while (instrMenuChoice != "5")
+                while (musicMenuChoice != "7")
                 {
-                    Console.WriteLine("What would you like to do in the instrument manager?");
+                    Console.WriteLine("What would you like to do in the music manager?");
 
                     Console.WriteLine();
-                    Console.WriteLine("1. Add a new instrument\n2. Display all instruments\n3. Save instruments to file\n4. Load a file\n5. Exit Instrument Manager");
-                    instrMenuChoice = Console.ReadLine();
-                    
-                    // TODO: add instrument manager options
-                    if (instrMenuChoice == "1")
+                    Console.WriteLine("1. Add new music\n2. Display all music\n3. Add an instrument\n4. Display all instruments\n5. Save music to file\n6. Load a file\n7. Exit Music Manager");
+                    musicMenuChoice = Console.ReadLine();
+                    // TODO: add music manager options
+                    if (musicMenuChoice == "1")
                     {
-                        myInstruments.AddInstrument();
-                    }
 
-                    else if (instrMenuChoice == "2")
-                    {
-                        myInstruments.DisplayInstruments();
                     }
-
-                    else if (instrMenuChoice == "3")
+                    else if (musicMenuChoice == "2")
                     {
-                        myInstruments.SaveInstruments();
-                    }
-
-                    else if (instrMenuChoice == "4")
-                    {
-                        myInstruments.LoadInstruments();
-                    }
-
-                    else if (instrMenuChoice == "5")
-                    {
-                        break;
-                    }
-
-                    else
-                    {
-                        Console.WriteLine("Please choose an option from the menu.");
+                        myMusic.DisplayMusic();
                     }
                 }
             }
 
-            else if (mainMenuChoice == "4")
+            else if (mainMenuChoice == "3")
             {
                 Console.WriteLine("Welcome to the metronome!");
 
@@ -109,7 +78,7 @@ class Program
 
                 // Add metronome Run method
             }
-            else if (mainMenuChoice == "5")
+            else if (mainMenuChoice == "4")
             {
                 break;
             }

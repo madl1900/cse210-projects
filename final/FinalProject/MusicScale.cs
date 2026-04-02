@@ -1,23 +1,19 @@
 public class MusicScale : Music
 {
-    private string _rhythm;
+    private int _rhythm;
 
-    public MusicScale(string name, int tempo, string timeSignature) : base(name, tempo, timeSignature)
-    {
-        _rhythm = "quarter notes";
-    }
-    public MusicScale(string name, int tempo, string timeSignature, string rhythm) : base(name, tempo, timeSignature)
+    public MusicScale(string name, int tempo, string timeSignature, int rhythm) : base(name, tempo, timeSignature)
     {
         _rhythm = rhythm;
     }
 
-    public void SetRhythm(string rhythm)
+    public override string DisplayInfo()
     {
-        _rhythm = rhythm;
+        return $"Scale: {_name}, Rhythm: {_rhythm}";
     }
 
-    public override void DisplayInfo()
+    public override string SaveInfo()
     {
-        // TODO: display scale info
+        return $"MusicScale, {_name}, {_tempo}, {_timeSignature}, {_rhythm}";
     }
 }

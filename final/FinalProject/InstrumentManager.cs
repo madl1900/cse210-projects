@@ -16,9 +16,12 @@ public class InstrumentManager
 
     public void DisplayInstruments()
     {
+        int i = 0;
+
         foreach (Instrument instr in _instruments)
         {
-            Console.WriteLine(instr.DisplayInstrument());
+            i++;
+            Console.WriteLine($"{i}. {instr.DisplayInstrument()}");
         }
     }
 
