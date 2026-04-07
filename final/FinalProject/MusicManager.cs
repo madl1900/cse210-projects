@@ -257,25 +257,6 @@ public class MusicManager
         }
     }
 
-    public Music GetMusic(int i)
-    {
-        if (i <= _music.Count)
-        {
-            return _music[i-1];    
-        }
-        else
-        {
-            Console.WriteLine("You do not have that many songs. The first song was chosen instead.");
-            return _music[0];
-        }
-        
-    }
-
-    public int GetMusicListLength()
-    {
-        return _music.Count();
-    }
-
     public void AddInstrument()
     {
         Console.WriteLine();
@@ -313,6 +294,25 @@ public class MusicManager
             Console.WriteLine("You do not have that many instruments. The first instrument was chosen instead.");
             return _instruments[0];
         }
+    }
+
+    public Music GetMusic(int i)
+    {
+        if (i <= _music.Count)
+        {
+            return _music[i-1];    
+        }
+        else
+        {
+            Console.WriteLine("You do not have that many songs. The first song was chosen instead.");
+            return _music[0];
+        }
+        
+    }
+
+    public int GetMusicListLength()
+    {
+        return _music.Count();
     }
 
     public int GetInstrListLength()
