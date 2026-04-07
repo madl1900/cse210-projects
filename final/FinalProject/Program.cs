@@ -1,13 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
-/* 
-This program was created to help musicians track their music and practices.
-It has nested menus for the practice log, music manager, and metronome, which are
-all interconnected so that you can use the music and instruments in the music manager
-within the practice log and metronome. The metronome is a visual one, which shows the
-beats based on the inputted tempo and time signature. For the music, there are two types:
-MusicPiece, which represents a song, and MusicScale, which represents a scale.
-*/
+
 class Program
 {
     static void Main(string[] args)
