@@ -1,3 +1,5 @@
+using System.Dynamic;
+
 public class MusicManager
 {
     private List<Music> _music = new List<Music>();
@@ -5,7 +7,7 @@ public class MusicManager
 
     public void AddMusic()
     {
-        // add music to the corresponding type of music list
+        Console.WriteLine();
         Console.WriteLine("1. Song\n2. Scale");
         Console.Write("What type of music would you like to add? ");
         string musicChoice = Console.ReadLine();
@@ -14,16 +16,28 @@ public class MusicManager
         {
             if (_instruments.Count() == 0)
             {
+                Console.WriteLine();
                 Console.WriteLine("You must add an instrument first:");
                 AddInstrument();
             }
             
-            DisplayInstruments();
-            Console.Write("Which instrument is this song for? ");
-            string instrChoice = Console.ReadLine();
-            int instrChoiceIndex = int.Parse(instrChoice) - 1;
+            bool instrIsInt = false;
+            int instrChoiceIndex = 0;
 
-            Instrument songInstr = _instruments[instrChoiceIndex];
+            while (!instrIsInt)
+            {
+                DisplayInstruments();
+                Console.Write("What instrument is this song for? ");
+                string InstrChoice = Console.ReadLine();
+                instrIsInt = int.TryParse(InstrChoice, out instrChoiceIndex);
+
+                if (!instrIsInt)
+                {
+                    Console.WriteLine("You must type a whole number.");
+                }
+            }
+
+            Instrument songInstr = GetInstrument(instrChoiceIndex);
 
             Console.Write("What is the name of the song? ");
             string name = Console.ReadLine();
@@ -31,8 +45,20 @@ public class MusicManager
             Console.Write("Who is the composer? ");
             string composer = Console.ReadLine();
 
-            Console.Write("What is the song's tempo? ");
-            int tempo = int.Parse(Console.ReadLine());
+            bool tempoIsInt = false;
+            int tempo = 0;
+
+            while (!tempoIsInt)
+            {
+                Console.Write("What is the song's tempo? ");
+                string tempoStr = Console.ReadLine();
+                tempoIsInt = int.TryParse(tempoStr, out tempo);
+
+                if (!tempoIsInt)
+                {
+                    Console.WriteLine("You must type a whole number.");
+                }
+            }
 
             Console.Write("What is the time signature? ");
             string timeSignature = Console.ReadLine();
@@ -46,17 +72,42 @@ public class MusicManager
 
         else if (musicChoice == "2")
         {
+            Console.WriteLine();
             Console.Write("What is the name of the scale? ");
             string name = Console.ReadLine();
 
-            Console.Write("What tempo will the scale be? ");
-            int tempo = int.Parse(Console.ReadLine());
+            bool tempoIsInt = false;
+            int tempo = 0;
+
+            while (!tempoIsInt)
+            {
+                Console.Write("What tempo will the scale be? ");
+                string tempoStr = Console.ReadLine();
+                tempoIsInt = int.TryParse(tempoStr, out tempo);
+
+                if (!tempoIsInt)
+                {
+                    Console.WriteLine("You must type a whole number.");
+                }
+            }            
 
             Console.Write("What is the time signature? ");
             string timeSignature = Console.ReadLine();
 
-            Console.Write("How many beats will each note get? ");
-            int rhythm = int.Parse(Console.ReadLine());
+            bool rhythmIsInt = false;
+            int rhythm = 0;
+
+            while (!rhythmIsInt)
+            {
+                Console.Write("How many beats will each note get? ");
+                string rhythmStr = Console.ReadLine();
+                rhythmIsInt = int.TryParse(rhythmStr, out rhythm);
+
+                if (!rhythmIsInt)
+                {
+                    Console.WriteLine("You must type a whole number.");
+                }
+            }            
 
             MusicScale myScale = new MusicScale(name, tempo, timeSignature, rhythm);
             _music.Add(myScale);
@@ -64,6 +115,8 @@ public class MusicManager
     }
     public void DisplayMusic()
     {
+        Console.WriteLine();
+
         int i = 0;
         foreach (Music m in _music)
         {
@@ -89,6 +142,7 @@ public class MusicManager
 
     public void SaveMusicFile()
     {
+        Console.WriteLine();
         Console.Write("Enter the name you want your file saved as: ");
         string filename = Console.ReadLine();
         
@@ -99,15 +153,114 @@ public class MusicManager
             outputFile.WriteLine(m.SaveInfo());
         }
         }
+
+        Console.WriteLine("Your file has been saved!");
     }
 
-    public void LoadMusicFile(string filename)
+    public void LoadMusicFile()
     {
-        // TODO: load a file and put in lists
+        Console.WriteLine();
+        Console.WriteLine("*If file is missing valid values, they may be given default values*");        
+        Console.Write("Enter the name of the file you want loaded: ");
+        string filename = Console.ReadLine();
+
+        if (File.Exists(filename))
+        {
+            _instruments.Clear();
+            _music.Clear();
+
+            string[] lines = System.IO.File.ReadAllLines(filename);
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split("|");
+                string[] musicInfo = parts[0].Split(",");
+
+                if (musicInfo[0] == "MusicScale")
+                {
+                    string scaleName = musicInfo[1];
+                    
+                    string tempoStr = musicInfo[2];
+                    bool tempoIsInt = int.TryParse(tempoStr, out int scaleTempo);
+
+                    if (!tempoIsInt)
+                    {
+                        scaleTempo = 88;
+                    }
+
+                    string scaleTimeSig = musicInfo[3];
+                
+                    string rhythmStr = musicInfo[4];
+                    bool rhythmIsInt = int.TryParse(rhythmStr, out int scaleRhythm);
+
+                    if (!rhythmIsInt)
+                    {
+                        scaleRhythm = 1;
+                    }
+
+                    MusicScale savedScale = new MusicScale(scaleName, scaleTempo, scaleTimeSig, scaleRhythm);
+                    _music.Add(savedScale);
+                }
+
+                else if (musicInfo[0] == "MusicPiece")
+                {
+                    string songName = musicInfo[1];
+
+                    string tempoStr = musicInfo[2];
+                    bool tempoIsInt = int.TryParse(tempoStr, out int songTempo);
+
+                    if (!tempoIsInt)
+                    {
+                        songTempo = 88;
+                    }
+
+                    string songTimeSig = musicInfo[3];
+                    string songKeySig = musicInfo[4];
+                    string songComposer = musicInfo[5];
+
+                    string[] instrInfo = parts[1].Split(",");
+                    string instrumentName = instrInfo[1];
+                    string instrumentType = instrInfo[2];
+
+                    Instrument savedInstr = new Instrument(instrumentName, instrumentType);
+                    bool instrExists = false;
+                    foreach (Instrument i in _instruments)
+                    {
+                        if(savedInstr.GetInstrName == i.GetInstrName && savedInstr.GetInstrType == i.GetInstrType)
+                        {
+                            instrExists = true;
+                            savedInstr = i;
+                            break;
+                        }
+                    }
+
+                    if (!instrExists)
+                    {
+                        _instruments.Add(savedInstr);
+                    }
+
+                    MusicPiece savedSong = new MusicPiece(songName, songTempo, songTimeSig, savedInstr, songComposer, songKeySig);
+                    _music.Add(savedSong);
+                }
+            }
+
+            Console.WriteLine("Your file has been loaded!");
+
+            if (_music.Count() == 0)
+            {
+                Console.WriteLine("That file did not have any music");
+            }
+        }
+
+        else
+        {
+            Console.WriteLine("That file does not exist.");
+        }
     }
 
     public void AddInstrument()
     {
+        Console.WriteLine();
         Console.WriteLine("What instrument would you like to add? ");
         string instr = Console.ReadLine().ToLower();
 
@@ -120,6 +273,8 @@ public class MusicManager
 
     public void DisplayInstruments()
     {
+        Console.WriteLine();
+
         int i = 0;
 
         foreach (Instrument instr in _instruments)
@@ -129,54 +284,55 @@ public class MusicManager
         }
     }
 
-    public void SaveInstruments()
+    public Instrument GetInstrument(int i)
     {
-        Console.Write("Enter the name you want your file saved as: ");
-        string filename = Console.ReadLine();
-        
-        using (StreamWriter outputFile = new StreamWriter(filename))
+        if (i <= _instruments.Count)
         {
-            foreach (Instrument instr in _instruments)
-        {
-            outputFile.WriteLine(instr.SaveInstrument());
+            return _instruments[i-1];
         }
+        else
+        {
+            Console.WriteLine("You do not have that many instruments. The first instrument was chosen instead.");
+            return _instruments[0];
         }
     }
 
-    public void LoadInstruments()
+    public Music GetMusic(int i)
     {
-        Console.Write("Enter the name of the file you want loaded: ");
-        string filename = Console.ReadLine();
-
-        if (File.Exists(filename))
+        if (i <= _music.Count)
         {
-            _instruments.Clear();
-
-            string[] lines = System.IO.File.ReadAllLines(filename);
-
-            foreach (string line in lines)
-            {
-                string[] parts = line.Split(",");
-                if (parts[0] == "Instrument")
-                {
-                    string instrName = parts[1];
-                    string instrType = parts[2];
-
-                    Instrument myInstr = new Instrument(instrName, instrType);
-                    
-                    _instruments.Add(myInstr);
-                }
-            }
-
-            if (_instruments.Count() == 0)
-            {
-                Console.WriteLine("That file did not have any instruments.");
-            }
+            return _music[i-1];    
         }
-        
         else
         {
-            Console.WriteLine("That file does not exist.");
+            Console.WriteLine("You do not have that many songs. The first song was chosen instead.");
+            return _music[0];
         }
+        
+    }
+
+    public int GetMusicListLength()
+    {
+        return _music.Count();
+    }
+
+    public int GetInstrListLength()
+    {
+        return _instruments.Count();
+    }
+
+    public Instrument GetRandomInstr()
+    {
+        if (_instruments.Count == 0)
+        {
+            Console.WriteLine("You don't have any instruments yet, please add one:");
+            AddInstrument();
+        }
+        
+        Random randomGen = new Random();
+
+        Instrument instr = _instruments[randomGen.Next(_instruments.Count)];
+
+        return instr;
     }
 }

@@ -18,4 +18,14 @@ public class Instrument
     {
         return $"Instrument,{_name},{_type}";
     }
+
+    public string GetInstrName()
+    {
+        return _name;
+    }
+
+    public string GetInstrType()
+    {
+        return _type;
+    }
 }

@@ -14,6 +14,6 @@ public class MusicScale : Music
 
     public override string SaveInfo()
     {
-        return $"MusicScale, {_name}, {_tempo}, {_timeSignature}, {_rhythm}";
+        return $"MusicScale,{_name},{_tempo},{_timeSignature},{_rhythm}";
     }
 }

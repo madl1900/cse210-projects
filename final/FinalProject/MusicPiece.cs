@@ -13,11 +13,16 @@ public class MusicPiece : Music
 
     public override string DisplayInfo()
     {
-        return $"Song: {_name} Composer: {_composer} Instrument: {_instrument.DisplayInstrument()}";
+        return $"Song: {_name}, Composer: {_composer}";
     }
 
     public override string SaveInfo()
     {
-        return $"MusicPiece, {_name}, {_tempo}, {_timeSignature}, {_keySignature}, {_composer}|{_instrument.SaveInstrument()}";
+        return $"MusicPiece,{_name},{_tempo},{_timeSignature},{_keySignature},{_composer}|{_instrument.SaveInstrument()}";
+    }
+
+    public Instrument GetMusicInstr()
+    {
+        return _instrument;
     }
 }

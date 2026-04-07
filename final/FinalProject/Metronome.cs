@@ -3,13 +3,8 @@ public class Metronome
     private int _tempo;
     private int _duration;
     private string _timeSignature;
-
-    public Metronome(int duration)
-    {
-        duration = _duration;
-        _tempo = 88;
-        _timeSignature = "4/4";
-    }
+    private DateTime _endTime;
+    
     public Metronome(int tempo, string timeSignature, int duration)
     {
         _tempo = tempo;
@@ -17,18 +12,53 @@ public class Metronome
         _duration = duration;
     }
 
-    public void SetTempo(int tempo)
+    public int ConvertTempo()
     {
-        _tempo = tempo;
+        return 60000/_tempo;
     }
 
-    public void SetTimeSignature(string timeSignature)
+    public void SetEndTime()
     {
-        _timeSignature = timeSignature;
+        DateTime startTime = DateTime.Now;
+        _endTime = startTime.AddSeconds(_duration);
     }
-
     public void Run()
-    {
-        // TODO: run metronome
+    {        
+        string[] timeSigParts = _timeSignature.Split("/");
+        int topTime;
+
+        if (timeSigParts.Count() < 2)
+        {
+            topTime = 4;
+        }
+
+        else
+        {
+            string topTimeStr = timeSigParts[0];
+            bool topIsInt = int.TryParse(topTimeStr, out topTime);
+
+            if (!topIsInt)
+            {
+                topTime = 4;
+            }
+        }
+
+        int convertedTempo = ConvertTempo();
+
+        SetEndTime();
+        while (DateTime.Now < _endTime)
+        {
+            Console.Clear();
+            Console.WriteLine("\\ /");
+            Console.WriteLine("-o-");
+            Console.WriteLine("/ \\");
+            Thread.Sleep(convertedTempo);
+            
+            for (int i = 1; i < topTime; i++)
+            {
+                Console.WriteLine(" o");
+                Thread.Sleep(convertedTempo);
+            }
+        }
     }
 }
