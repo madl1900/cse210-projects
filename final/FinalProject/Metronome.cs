@@ -14,7 +14,12 @@ public class Metronome
 
     public int ConvertTempo()
     {
-        return 60000/_tempo;
+        if (_tempo == 0)
+        {
+            _tempo = 88;            
+        }
+
+        return 60000/88;
     }
 
     public void SetEndTime()
@@ -37,7 +42,7 @@ public class Metronome
             string topTimeStr = timeSigParts[0];
             bool topIsInt = int.TryParse(topTimeStr, out topTime);
 
-            if (!topIsInt)
+            if (!topIsInt | topTime == 0)
             {
                 topTime = 4;
             }

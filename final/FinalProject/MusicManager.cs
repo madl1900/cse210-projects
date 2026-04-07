@@ -39,6 +39,7 @@ public class MusicManager
 
             Instrument songInstr = GetInstrument(instrChoiceIndex);
 
+            Console.WriteLine();
             Console.Write("What is the name of the song? ");
             string name = Console.ReadLine();
 
@@ -63,10 +64,7 @@ public class MusicManager
             Console.Write("What is the time signature? ");
             string timeSignature = Console.ReadLine();
 
-            Console.Write("What key is the song in? ");
-            string keySignature = Console.ReadLine();
-
-            MusicPiece mySong = new MusicPiece(name, tempo, timeSignature, songInstr, composer, keySignature);
+            MusicPiece mySong = new MusicPiece(name, tempo, timeSignature, songInstr, composer);
             _music.Add(mySong);
         }
 
@@ -143,6 +141,8 @@ public class MusicManager
     public void SaveMusicFile()
     {
         Console.WriteLine();
+        Console.WriteLine("*Any instruments that are not connected to a song will be lost*");
+        Console.WriteLine();
         Console.Write("Enter the name you want your file saved as: ");
         string filename = Console.ReadLine();
         
@@ -215,8 +215,7 @@ public class MusicManager
                     }
 
                     string songTimeSig = musicInfo[3];
-                    string songKeySig = musicInfo[4];
-                    string songComposer = musicInfo[5];
+                    string songComposer = musicInfo[4];
 
                     string[] instrInfo = parts[1].Split(",");
                     string instrumentName = instrInfo[1];
@@ -239,7 +238,7 @@ public class MusicManager
                         _instruments.Add(savedInstr);
                     }
 
-                    MusicPiece savedSong = new MusicPiece(songName, songTempo, songTimeSig, savedInstr, songComposer, songKeySig);
+                    MusicPiece savedSong = new MusicPiece(songName, songTempo, songTimeSig, savedInstr, songComposer);
                     _music.Add(savedSong);
                 }
             }
@@ -256,6 +255,25 @@ public class MusicManager
         {
             Console.WriteLine("That file does not exist.");
         }
+    }
+
+    public Music GetMusic(int i)
+    {
+        if (i <= _music.Count)
+        {
+            return _music[i-1];    
+        }
+        else
+        {
+            Console.WriteLine("You do not have that many songs. The first song was chosen instead.");
+            return _music[0];
+        }
+        
+    }
+
+    public int GetMusicListLength()
+    {
+        return _music.Count();
     }
 
     public void AddInstrument()
@@ -295,25 +313,6 @@ public class MusicManager
             Console.WriteLine("You do not have that many instruments. The first instrument was chosen instead.");
             return _instruments[0];
         }
-    }
-
-    public Music GetMusic(int i)
-    {
-        if (i <= _music.Count)
-        {
-            return _music[i-1];    
-        }
-        else
-        {
-            Console.WriteLine("You do not have that many songs. The first song was chosen instead.");
-            return _music[0];
-        }
-        
-    }
-
-    public int GetMusicListLength()
-    {
-        return _music.Count();
     }
 
     public int GetInstrListLength()

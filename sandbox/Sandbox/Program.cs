@@ -209,23 +209,6 @@ class Program
         // classes. Parent to child, super to sub, base to derived. Inheritance allows you to
         // use the same code for multiple related classes, without redundancy. */
 
-        for (int i = 0; i < 4; i++)
-        {
-            Console.Clear();
-            Console.WriteLine("\\ /");
-            Console.WriteLine("-o-");
-            Console.WriteLine("/ \\");
-            Thread.Sleep(500);
-
-            Console.WriteLine(" o");
-            Thread.Sleep(500);
-
-            Console.WriteLine(" o");
-            Thread.Sleep(500);
-
-            Console.WriteLine(" o");
-            Thread.Sleep(500);
-        }
     }
 }
 

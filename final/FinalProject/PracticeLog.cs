@@ -108,8 +108,7 @@ public class PracticeLog
                         }
 
                         string songTimeSig = songInfo[3];
-                        string songKeySig = songInfo[4];
-                        string songComposer = songInfo[5];
+                        string songComposer = songInfo[4];
 
                         string[] instr2Info = parts[1].Split(",");
                         string instrumentName2 = instrInfo[1];
@@ -117,7 +116,7 @@ public class PracticeLog
 
                         Instrument savedInstr2 = new Instrument(instrumentName2, instrumentType2);
 
-                        MusicPiece savedSong = new MusicPiece(songName, songTempo, songTimeSig, savedInstr, songComposer, songKeySig);
+                        MusicPiece savedSong = new MusicPiece(songName, songTempo, songTimeSig, savedInstr, songComposer);
 
                         PracticeEntry savedPractice = new PracticeEntry(savedInstr, savedSong, duration, date);
                         _entries.Add(savedPractice);
@@ -126,7 +125,7 @@ public class PracticeLog
             }
 
             Console.WriteLine("Your file has been loaded!");
-            
+
             if (_entries.Count() == 0)
             {
                 Console.WriteLine("That file did not have any practice entries.");
